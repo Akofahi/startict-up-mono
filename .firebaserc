@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "startict-up": {
+      "hosting": {
+        "admin": [
+          "startict-up"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "startict-up"
+  }
+}

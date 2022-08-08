@@ -1,0 +1,21 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="addStartupForm" (ngSubmit)="submitForm()">
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your username!">
+        <nz-input-group nzPrefixIcon="user">
+          <input formControlName="name" nz-input placeholder="Company Name" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-input-group nzPrefixIcon="mail">
+          <input formControlName="ceo" nz-input  placeholder="CEO" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button nzType="primary" >Log in</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
