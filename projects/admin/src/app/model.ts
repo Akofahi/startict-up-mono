@@ -1,4 +1,5 @@
 export interface Startup{
+    id?: string;
     ceo: string;
-    name: string;
+    companyName: string;
 }

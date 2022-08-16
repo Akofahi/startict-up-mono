@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
@@ -21,6 +20,9 @@ import { StartupSubmitFormComponent } from './startup-submit-form/startup-submit
 import { WelcomeComponent } from './pages/welcome/welcome.component';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { StartupsListComponent } from './startups-list/startups-list.component';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { CompanyProfileComponent } from './company-profile/company-profile.component';
 
 registerLocaleData(en);
 
@@ -28,7 +30,9 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     StartupSubmitFormComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    StartupsListComponent,
+    CompanyProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,7 @@ registerLocaleData(en);
     NzMenuModule,
     NzFormModule,
     ReactiveFormsModule,
-    NzInputModule,
+    NzInputModule,NzListModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

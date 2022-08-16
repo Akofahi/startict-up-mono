@@ -19,17 +19,15 @@ export class AppComponent implements OnInit {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.firebaseService.requests.subscribe(res => {
-      console.log('requests', res);
+      // console.log('requests', res);
       
     })
     this.firebaseService.startups.subscribe(res => {
-      console.log('startups', res);
+      // console.log('startups', res);
       
     })
 
-    const startup : Startup = {
-      ceo: "tamim",name:"Deed"
-    }
+
   //   this.firebaseService.addStartup(startup)
   }
 

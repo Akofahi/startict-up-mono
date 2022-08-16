@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { doc, docData, addDoc, collection, collectionData, Firestore } from '@angular/fire/firestore';
+import {deleteDoc,updateDoc,  docData, addDoc, collection, collectionData, Firestore,getDocs, QuerySnapshot } from '@angular/fire/firestore';
 import { Startup } from './model';
 
 @Injectable({
@@ -17,12 +17,23 @@ export class FirebaseService {
 
 
 
-  startups = collectionData(this.startupCollectiopnRef)
-  requests = collectionData(this.requestCollectiopnRef)
+  startups = collectionData(this.startupCollectiopnRef, {idField: 'id'})
+  requests = collectionData(this.requestCollectiopnRef, {idField: 'id'})
 
 
-  
+
   addStartup(startup: Startup) {
     addDoc(this.startupCollectiopnRef, startup)
   }
+
+  getStartups(){
+    return getDocs<any>(this.startupCollectiopnRef)
+  }
+
+  // todo get id to updatedoc
+  updateStartup(startup : Startup){
+
+  }
+
 }
+
