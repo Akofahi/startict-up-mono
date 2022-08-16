@@ -17,12 +17,13 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { StartupSubmitFormComponent } from './startup-submit-form/startup-submit-form.component';
-import { WelcomeComponent } from './pages/welcome/welcome.component';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { StartupsListComponent } from './startups-list/startups-list.component';
 import { NzListModule } from 'ng-zorro-antd/list';
-import { CompanyProfileComponent } from './company-profile/company-profile.component';
+import { CompanyProfileComponent } from './pages/company-profile/company-profile.component';
+import { CompaniesComponent } from './pages/companies/companies.component';
 
 registerLocaleData(en);
 
@@ -30,7 +31,7 @@ registerLocaleData(en);
   declarations: [
     AppComponent,
     StartupSubmitFormComponent,
-    WelcomeComponent,
+    CompaniesComponent,
     StartupsListComponent,
     CompanyProfileComponent
   ],
@@ -45,7 +46,7 @@ registerLocaleData(en);
     NzMenuModule,
     NzFormModule,
     ReactiveFormsModule,
-    NzInputModule,NzListModule,
+    NzInputModule,NzListModule,NzPageHeaderModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

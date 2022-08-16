@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {deleteDoc,updateDoc,  docData, addDoc, collection, collectionData, Firestore,getDocs, QuerySnapshot } from '@angular/fire/firestore';
+import {deleteDoc,updateDoc,  docData, addDoc, collection, collectionData, Firestore, getDocs, QuerySnapshot ,getDoc,doc} from '@angular/fire/firestore';
 import { Startup } from './model';
 
 @Injectable({
@@ -26,10 +26,25 @@ export class FirebaseService {
     addDoc(this.startupCollectiopnRef, startup)
   }
 
-  getStartups(){
-    return getDocs<any>(this.startupCollectiopnRef)
-  }
+//  getStartup(id:string){
+//   getDoc(doc(this.afs, 'startups/' + id )).then(res =>{
+//     //  console.log("get startup" , res.data(),"get startup id",res.id)
+//     return {
+//       ...res.data(),
+//       id: res.id,
+//     }
+//   })
+//  }
 
+async getStartup(id:string){
+  const res = await getDoc(doc(this.afs,'startups/'+id))
+  console.log("get startup" , res.data(),"get startup id",res.id)
+  return {
+          ...res.data(),
+          id: res.id,
+        }
+
+}
   // todo get id to updatedoc
   updateStartup(startup : Startup){
 
