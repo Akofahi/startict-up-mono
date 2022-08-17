@@ -1,3 +1,7 @@
+**This project is an online responsive website as a platform for both Startup ICT companies wanting to reach out or for individuals enthusiast searching for ICT startup companies **
+
+
+
 # StartictUp
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.9.
