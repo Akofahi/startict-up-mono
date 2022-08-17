@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {deleteDoc,updateDoc,  docData, addDoc, collection, collectionData, Firestore, getDocs, QuerySnapshot ,getDoc,doc} from '@angular/fire/firestore';
+import { deleteDoc, addDoc, collection, collectionData, Firestore, getDoc, doc,updateDoc } from '@angular/fire/firestore';
 import { Startup } from './model';
 
 @Injectable({
@@ -17,37 +17,41 @@ export class FirebaseService {
 
 
 
-  startups = collectionData(this.startupCollectiopnRef, {idField: 'id'})
-  requests = collectionData(this.requestCollectiopnRef, {idField: 'id'})
+  startups = collectionData(this.startupCollectiopnRef, { idField: 'id' })
+  requests = collectionData(this.requestCollectiopnRef, { idField: 'id' })
 
 
 
   addStartup(startup: Startup) {
-    addDoc(this.startupCollectiopnRef, startup)
+    return addDoc(this.startupCollectiopnRef, startup)
   }
 
-//  getStartup(id:string){
-//   getDoc(doc(this.afs, 'startups/' + id )).then(res =>{
-//     //  console.log("get startup" , res.data(),"get startup id",res.id)
-//     return {
-//       ...res.data(),
-//       id: res.id,
-//     }
-//   })
-//  }
+  //  getStartup(id:string){
+  //   getDoc(doc(this.afs, 'startups/' + id )).then(res =>{
+  //     //  console.log("get startup" , res.data(),"get startup id",res.id)
+  //     return {
+  //       ...res.data(),
+  //       id: res.id,
+  //     }
+  //   })
+  //  }
 
-async getStartup(id:string){
-  const res = await getDoc(doc(this.afs,'startups/'+id))
-  console.log("get startup" , res.data(),"get startup id",res.id)
-  return {
-          ...res.data(),
-          id: res.id,
-        }
+  async getStartup(id: string) {
+    const res = await getDoc(doc(this.afs, 'startups/' + id));
+    console.log("get startup", res.data(), "get startup id", res.id);
+    return {
+      ...res.data(),
+      id: res.id,
+    }
 
-}
+  }
   // todo get id to updatedoc
-  updateStartup(startup : Startup){
+  updateStartup(id:string,startup:Startup) {
+    
+  }
 
+  async deleteStartup(id:string){
+    return await deleteDoc(doc(this.afs,'startups/'+id));
   }
 
 }

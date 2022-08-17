@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { FirebaseService } from '../firebase.service';
 import { Startup } from '../model';
 
@@ -14,7 +15,9 @@ export class StartupsListComponent implements OnInit {
   loading = false;
   
   constructor(
-    private firebaseService: FirebaseService
+    private firebaseService: FirebaseService,
+    private router: Router,
+
   ) { }
   ngOnInit(): void {
     this.firebaseService.startups.subscribe(res => {
@@ -23,7 +26,9 @@ export class StartupsListComponent implements OnInit {
     })
   }
 
- 
+  goToAdd() {
+    this.router.navigate(['/companies/add']);
+  }
 
 
   // data = [
