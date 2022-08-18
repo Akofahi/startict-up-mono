@@ -13,7 +13,7 @@
   </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button   nzType="primary" >{{btnLabel}}</button>
+        <button *ngIf="isAdd || isEditEnabled" nz-button   nzType="primary" >{{btnLabel}}</button>
       </nz-form-control>
     </nz-form-item>
   </form>

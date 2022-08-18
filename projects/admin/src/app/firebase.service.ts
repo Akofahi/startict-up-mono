@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { deleteDoc, addDoc, collection, collectionData, Firestore, getDoc, doc,updateDoc } from '@angular/fire/firestore';
+import { deleteDoc, addDoc, collection, collectionData, Firestore, getDoc, doc,updateDoc,UpdateData, DocumentReference } from '@angular/fire/firestore';
 import { Startup } from './model';
 
 @Injectable({
@@ -47,7 +47,7 @@ export class FirebaseService {
   }
   // todo get id to updatedoc
   updateStartup(id:string,startup:Startup) {
-    
+    return updateDoc(doc(this.afs,'startups/'+id),startup as any)
   }
 
   async deleteStartup(id:string){

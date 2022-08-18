@@ -11,13 +11,14 @@ import { Startup } from '../model';
 })
 export class StartupSubmitFormComponent implements OnInit {
   @Input() startup?: Startup;
-  
+  @Input() id?:string | null ;
   @Input() 
   public set isEditEnabled(v : boolean) {
     console.log(v);
     this._isEditEnabled = v;
     if(v){
       this.startupForm?.enable();
+      
     }else{
       this.startupForm?.disable();
     }
@@ -58,6 +59,7 @@ export class StartupSubmitFormComponent implements OnInit {
     if (this.isAdd) {
       this.add();
     } else if (this.isEditEnabled) {
+      console.log("page id is",this.id)
       this.update();
     }
   }
@@ -77,5 +79,18 @@ export class StartupSubmitFormComponent implements OnInit {
     }
   }
 
-  update(): void {}
+  update(): void {
+    if (this.startupForm.valid) {
+      this.firebaseService.updateStartup(this.id!,this.startupForm.value).then(() => {
+        this.router.navigate(['/companies']);
+      });
+    } else {
+      Object.values(this.startupForm.controls).forEach((control) => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({ onlySelf: true });
+        }
+      });
+    }
+  }
 }
