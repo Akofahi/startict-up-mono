@@ -24,9 +24,11 @@ export class AppComponent implements OnInit {
     })
     this.firebaseService.startups.subscribe(res => {
       // console.log('startups', res);
-      
     })
 
+    this.firebaseService.sectors.subscribe(res =>{
+         console.log('sectors', res);
+    })
 
   //   this.firebaseService.addStartup(startup)
   }

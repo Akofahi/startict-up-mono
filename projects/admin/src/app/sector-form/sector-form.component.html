@@ -1,0 +1,21 @@
+<form nz-form [nzLayout]="'vertical'" [formGroup]="sectorForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="sectorName">Sector Name</nz-form-label>
+    <nz-form-control nzErrorTip="The input is not valid Sector Name!">
+      <input nz-input formControlName="sectorName" />
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="category">Category</nz-form-label>
+    <nz-form-control nzErrorTip="The input is not valid E-mail!">
+     <nz-select formControlName="category" nzPlaceHolder="Select a Category">
+        <nz-option *ngFor="let item of categorysList" [nzLabel]="item" [nzValue]="item"></nz-option>
+     </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control>
+      <button *ngIf="isAdd || isEditEnabled" nz-button nzType="primary">{{btnLabel}}</button>
+    </nz-form-control>
+  </nz-form-item>
+</form>

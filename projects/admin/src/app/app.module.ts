@@ -27,6 +27,11 @@ import { CompaniesComponent } from './pages/companies/companies.component';
 import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { SectorsComponent } from './pages/sectors/sectors.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
+import { SectorProfileComponent } from './pages/sector-profile/sector-profile.component';
+import { SectorFormComponent } from './sector-form/sector-form.component';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 
 registerLocaleData(en);
@@ -38,6 +43,10 @@ registerLocaleData(en);
     CompaniesComponent,
     StartupsListComponent,
     CompanyProfileComponent,
+    SectorsComponent,
+    CategoriesComponent,
+    SectorProfileComponent,
+    SectorFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,7 +59,7 @@ registerLocaleData(en);
     NzMenuModule,
     NzFormModule,
     ReactiveFormsModule,
-    NzInputModule,NzListModule,NzPageHeaderModule,NzSpaceModule ,NzButtonModule,NzNotificationModule,
+    NzInputModule,NzListModule,NzPageHeaderModule,NzSpaceModule ,NzButtonModule,NzNotificationModule,NzSelectModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

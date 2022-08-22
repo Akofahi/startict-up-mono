@@ -1,0 +1,19 @@
+<nz-page-header class="site-page-header" [nzTitle]="'Startup Sectors'">
+    <nz-page-header-extra >
+      <nz-space>
+        <button *nzSpaceItem nz-button nzType="primary" (click)="goToAdd()">Add Sector</button>
+      </nz-space>
+    </nz-page-header-extra>
+  </nz-page-header>
+  <nz-list nzItemLayout="horizontal" >
+    <nz-list-item *ngFor="let item of data ">
+      <nz-list-item-meta nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        nzDescription="Ant Design, a design language for background applications, is refined by Ant UED Team">
+        <nz-list-item-meta-title>
+          <a [routerLink]="'/sectors/'+item.id" >{{ item.sectorName +" "+item.category }}</a>
+        </nz-list-item-meta-title>
+      </nz-list-item-meta>
+    </nz-list-item>
+    <nz-list-empty *ngIf="data.length === 0"></nz-list-empty>
+  </nz-list>
+  
