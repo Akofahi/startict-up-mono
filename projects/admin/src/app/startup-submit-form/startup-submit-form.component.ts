@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../firebase.service';
-import { Startup } from '../model';
+import { FirebaseService } from '../../../../libs/src/firebase.service';
+import { Startup } from '../../../../libs/src/model';
 
 @Component({
   selector: 'app-startup-submit-form',
@@ -44,8 +44,17 @@ export class StartupSubmitFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.startupForm = this.fb.group({
-      companyName: [null, [Validators.required]],
-      ceo: [null, [Validators.required]],
+      startupName: [null, [Validators.required]],
+      logoImg: [null, [Validators.required]],
+      images : [null,[Validators.required]],
+      designColor : [null,[Validators.required]],
+      city : [null,[Validators.required]],
+      founderName : [null,[Validators.required]],
+      numberOfEmployees : [null,[Validators.required]],
+      yearOfEstablishment : [null,[Validators.required]],
+      websiteURL : [null,[Validators.required]],
+      email : [null,[Validators.required]],
+      sectors : [null,[Validators.required]],
     });
 
     if (this.isAdd) {

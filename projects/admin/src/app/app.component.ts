@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from './firebase.service';
-import { Startup } from './model';
+import { FirebaseService } from '../../../libs/src/firebase.service';
+
 
 @Component({
   selector: 'app-root',
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
     })
 
     this.firebaseService.sectors.subscribe(res =>{
-         console.log('sectors', res);
+        //  console.log('sectors', res);
     })
 
   //   this.firebaseService.addStartup(startup)

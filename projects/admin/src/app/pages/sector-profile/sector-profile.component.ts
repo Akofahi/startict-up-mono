@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
-import { FirebaseService } from '../../firebase.service';
+import { FirebaseService } from '../../../../../libs/src/firebase.service';
 
 @Component({
   selector: 'app-sector-profile',

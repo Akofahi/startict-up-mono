@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../../firebase.service';
-import { Startup,Sector } from '../../model';
+import { FirebaseService } from '../../../../../libs/src/firebase.service';
+import { Startup,Sector } from '../../../../../libs/src/model';
 
 @Component({
   selector: 'app-sectors',

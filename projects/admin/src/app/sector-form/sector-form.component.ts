@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FirebaseService } from '../firebase.service';
-import { Sector,Categorys } from '../model';
+import { FirebaseService } from '../../../../libs/src/firebase.service';
+import { Sector,Categorys } from '../../../../libs/src/model';
 
 @Component({
   selector: 'app-sector-form',
@@ -68,7 +68,7 @@ export class SectorFormComponent implements OnInit {
   add(): void {
     if (this.sectorForm.valid) {
       this.firebaseService.addSector(this.sectorForm.value).then(() => {
-        this.router.navigate(['/sectors']);
+        // this.router.navigate(['/sectors']);
       });
     } else {
       Object.values(this.sectorForm.controls).forEach((control) => {

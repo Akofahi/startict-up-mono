@@ -1,0 +1,89 @@
+<nz-page-header class="site-page-header" (nzBack)="onBack()" nzBackIcon [nzTitle]="title">
+    <nz-page-header-extra >
+      <nz-space>
+        <button *nzSpaceItem nz-button nzType="default" (click)="approve()">Approve</button>
+        <button *nzSpaceItem nz-button nzType="default" nzDanger (click)="reject()">Reject</button>
+      </nz-space>
+    </nz-page-header-extra>
+  </nz-page-header>
+  
+  <form nz-form  [formGroup]="requestForm" (ngSubmit)="add()">
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="startupName">Company Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input  nz-input formControlName="startupName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="logoImg">logoImg</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="logoImg" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="images">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="images" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="designColor">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="designColor" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="city">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="city" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="founderName">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="founderName" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="numberOfEmployees">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="numberOfEmployees" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="yearOfEstablishment">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="yearOfEstablishment" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="websiteURL">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="websiteURL" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="email">CEO Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+          <input nz-input formControlName="email" />
+        </nz-form-control>
+      </nz-form-item>
+  
+      <nz-form-item>
+        <nz-form-label nzRequired nzFor="categorys">Category</nz-form-label>
+        <nz-form-control nzErrorTip="The input is not valid E-mail!">
+         <nz-select (ngModelChange)="updateSectorsCat()" formControlName="categorys" nzPlaceHolder="Select a categorys">
+            <nz-option *ngFor="let item of categorysList" [nzLabel]="item" [nzValue]="item"></nz-option>
+         </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+  
+      <nz-form-item *ngIf="requestForm.get('categorys')?.value">
+        <nz-form-label nzRequired nzFor="sectors">Sectors</nz-form-label>
+        <nz-form-control nzErrorTip="The input is not valid E-mail!">
+         <nz-select formControlName="sectors" nzPlaceHolder="Select a sectors" nzMode="multiple">
+            <nz-option *ngFor="let item of filteredSectors" [nzLabel]="item.sectorName" [nzValue]="item.id"></nz-option>
+         </nz-select>
+        </nz-form-control>
+      </nz-form-item>
+      </form>

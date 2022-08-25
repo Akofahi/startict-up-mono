@@ -8,18 +8,19 @@ import {
   getDoc,
   doc,
   updateDoc,
+  getDocs,
 } from '@angular/fire/firestore';
-import { Sector, Startup } from './model';
+import { Observable } from 'rxjs';
+import { Categorys, Requests, Sector, Startup } from './model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class FirebaseService {
   constructor(private afs: Firestore) {}
 
   private startupCollectiopnRef = collection(this.afs, 'startups');
   private requestCollectiopnRef = collection(this.afs, 'requests');
   private sectorCollectionRef = collection(this.afs, 'sectors');
+  // private requestCollectiopnRef = collection(this.afs, 'requests');
 
   startups = collectionData(this.startupCollectiopnRef, { idField: 'id' });
   requests = collectionData(this.requestCollectiopnRef, { idField: 'id' });
@@ -51,6 +52,14 @@ export class FirebaseService {
       id: res.id,
     };
   }
+  async getRequests(id: string) {
+    const res = await getDoc(doc(this.afs, 'requests/' + id));
+    console.log('get request', res.data(), 'get request id', res.id);
+    return {
+      ...res.data(),
+      id: res.id,
+    };
+  }
   async getSector(id: string) {
     const res = await getDoc(doc(this.afs, 'sectors/' + id));
     return {
@@ -63,6 +72,9 @@ export class FirebaseService {
     return await updateDoc(doc(this.afs, 'startups/' + id), startup as any);
   }
 
+  async updateRequest(id: string, request:Partial<Requests> ) {
+    return await updateDoc(doc(this.afs, 'requests/' + id), request as any);
+  }
   async updateSector(id: string, sector: Sector) {
     return await updateDoc(doc(this.afs, 'sectors/' + id), sector as any);
   }
@@ -74,4 +86,23 @@ export class FirebaseService {
   async deleteSector(id: string) {
     return await deleteDoc(doc(this.afs, 'sectors/' + id));
   }
+
+  async deleteRequest(id: string) {
+    return await deleteDoc(doc(this.afs, 'requests/' + id));
+  }
+
+  addRequest(request: Requests) {
+    return addDoc(this.requestCollectiopnRef, {
+      ...request,
+      status: 'pending',
+    });
+  }
+
+  getSectors() {
+    return getDocs(this.sectorCollectionRef).then((x) =>
+      x.docs.map((x) => x.data())
+    );
+  }
+
+  public categorysList = Object.keys(Categorys).filter((v) => isNaN(Number(v)));
 }

@@ -128,7 +128,7 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "less"
         },
         "@schematics/angular:application": {
           "strict": true
@@ -146,14 +146,20 @@
             "main": "projects/startict-up-web/src/main.ts",
             "polyfills": "projects/startict-up-web/src/polyfills.ts",
             "tsConfig": "projects/startict-up-web/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "less",
             "assets": [
               "projects/startict-up-web/src/favicon.ico",
-              "projects/startict-up-web/src/assets"
+              "projects/startict-up-web/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
+              "projects/startict-up-web/src/theme.less",
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/startict-up-web/src/styles.scss"
+              "projects/startict-up-web/src/styles.less"
             ],
             "scripts": []
           },
@@ -215,16 +221,26 @@
             "polyfills": "projects/startict-up-web/src/polyfills.ts",
             "tsConfig": "projects/startict-up-web/tsconfig.spec.json",
             "karmaConfig": "projects/startict-up-web/karma.conf.js",
-            "inlineStyleLanguage": "scss",
+            "inlineStyleLanguage": "less",
             "assets": [
               "projects/startict-up-web/src/favicon.ico",
               "projects/startict-up-web/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/startict-up-web/src/styles.scss"
+              "projects/startict-up-web/src/styles.less"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "startict-up-web:build:production",
+            "firebaseProject": "startict-up",
+            "firebaseHostingSite": "startict-up"
           }
         }
       }
