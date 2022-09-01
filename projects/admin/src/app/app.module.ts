@@ -28,7 +28,6 @@ import { NzSpaceModule } from 'ng-zorro-antd/space';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
 import { SectorsComponent } from './pages/sectors/sectors.component';
-
 import { SectorProfileComponent } from './pages/sector-profile/sector-profile.component';
 import { SectorFormComponent } from './sector-form/sector-form.component';
 import { NzSelectModule } from 'ng-zorro-antd/select';

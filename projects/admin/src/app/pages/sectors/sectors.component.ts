@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Fuse from 'fuse.js';
 import { FirebaseService } from '../../../../../libs/src/firebase.service';
 import { Startup,Sector } from '../../../../../libs/src/model';
 
@@ -10,17 +11,26 @@ import { Startup,Sector } from '../../../../../libs/src/model';
 })
 export class SectorsComponent implements OnInit {
   data :Sector[]=[]
+  searchData:Sector[]=[]
   constructor(private firebaseService : FirebaseService,
     private router:Router) { }
 
   ngOnInit(): void {
     this.firebaseService.sectors.subscribe(res =>{
       this.data = res as any;
+      this.searchData = this.data
       console.log(this.data)
     })
   }
   goToAdd() {
     this.router.navigate(['/sectors/add']);
   }
+
+  search(searchValue:any){
+    //   console.log("Search = click");
+    // console.log(searchValue);
+      const fuse = new Fuse(this.data,{includeScore: true,keys:['startupName']})
+      this.searchData = fuse.search(searchValue).map((x:any)=> x.item)
+    }
 
 }
