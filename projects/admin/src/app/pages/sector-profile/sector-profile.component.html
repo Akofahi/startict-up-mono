@@ -2,7 +2,10 @@
     <nz-page-header-extra *ngIf="!isAdd">
       <nz-space>
         <button *nzSpaceItem nz-button nzType="default" (click)="enableEdit()">{{editBtnlabel}}</button>
-        <button *nzSpaceItem nz-button nzType="default" nzDanger (click)="delete()">Delete</button>
+        <button *nzSpaceItem nz-button nzType="default" nzDanger (nzOnConfirm)="confirm()"
+           nz-popconfirm
+        nzPopconfirmTitle="Are you sure delete this task?"
+        nzPopconfirmPlacement="bottom">Delete</button>
       </nz-space>
     </nz-page-header-extra>
   </nz-page-header>

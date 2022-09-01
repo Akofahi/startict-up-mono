@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { FirebaseService } from '../../../../../libs/src/firebase.service';
+
 
 @Component({
   selector: 'app-sector-profile',
@@ -25,7 +27,8 @@ export class SectorProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private firebaseService: FirebaseService,
     private router: Router,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private nzMessageService: NzMessageService
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +46,9 @@ export class SectorProfileComponent implements OnInit {
     this.router.navigate(['/sectors']);
   }
 
+
+
+
   delete() {
     this.firebaseService.deleteSector(this.id!).then(() => {
       this.onBack();
@@ -51,6 +57,12 @@ export class SectorProfileComponent implements OnInit {
         'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
       );
     });
+  }
+
+
+
+  confirm(): void {
+    this.delete()
   }
 
   enableEdit() {

@@ -57,6 +57,11 @@ export class CompanyProfileComponent implements OnInit {
     });
   }
 
+  confirm(): void {
+    this.delete()
+  }
+
+
   enableEdit() {
     return (this.isEditEnabled = !this.isEditEnabled);
   }

@@ -30,7 +30,9 @@ export class SectorsComponent implements OnInit {
     //   console.log("Search = click");
     // console.log(searchValue);
       const fuse = new Fuse(this.data,{includeScore: true,keys:['startupName']})
-      this.searchData = fuse.search(searchValue).map((x:any)=> x.item)
-    }
-
+      if(searchValue?.trim().length){
+        this.searchData = fuse.search(searchValue).map((x:any)=> x.item)}else{
+          this.searchData= this.data
+        }
+      }
 }
