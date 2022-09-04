@@ -299,14 +299,20 @@
             "polyfills": "projects/public-web/src/polyfills.ts",
             "tsConfig": "projects/public-web/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": [
-              "projects/public-web/src/favicon.ico",
-              "projects/public-web/src/assets"
-            ],
             "styles": [
-              "projects/public-web/src/styles.scss"
+              "projects/public-web/src/assets/css/bs.css",
+              "projects/public-web/src/assets/css/fa.css",
+              "projects/public-web/src/assets/css/pop.css",
+              "projects/public-web/src/assets/css/swiper.css"
             ],
-            "scripts": []
+            "scripts": [
+              "projects/public-web/src/assets/js/jq.js",
+              "projects/public-web/src/assets/js/easing.js",
+              "projects/public-web/src/assets/bs.js",
+              "projects/public-web/src/assets/js/pop.js",
+              "projects/public-web/src/assets/js/swiper.js",
+              "projects/public-web/src/assets/js/script.js"
+            ]
           },
           "configurations": {
             "production": {
