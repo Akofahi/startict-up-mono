@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../../../libs/src/firebase.service';
-
+import { map, finalize } from "rxjs/operators";
+import { Observable } from "rxjs";
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +10,11 @@ import { FirebaseService } from '../../../libs/src/firebase.service';
   styleUrls: ['./app.component.less']
 })
 export class AppComponent implements OnInit {
-
-  constructor(private firebaseService: FirebaseService) {
+  title = "cloudsSorage";
+  selectedFile: File = null as any;
+  fb: any;
+  downloadURL!: Observable<string>;
+  constructor(private firebaseService: FirebaseService,private storage: AngularFireStorage) {
 
   }
 
@@ -32,6 +37,30 @@ export class AppComponent implements OnInit {
 
   //   this.firebaseService.addStartup(startup)
   }
-
+  onFileSelected(event:any) {
+    var n = Date.now();
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
 
 }

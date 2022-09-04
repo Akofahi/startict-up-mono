@@ -10,6 +10,8 @@ import {
   updateDoc,
   getDocs,
 } from '@angular/fire/firestore';
+
+import{getBlob,uploadBytes,} from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { Categorys, Requests, Sector, Startup } from './model';
 

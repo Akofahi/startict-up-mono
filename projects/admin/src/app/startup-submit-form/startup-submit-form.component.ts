@@ -3,7 +3,16 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../../../libs/src/firebase.service';
 import { Startup } from '../../../../libs/src/model';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
+import { NzMessageService } from 'ng-zorro-antd/message';
+/* nzUpload: Upload */
+import { NzUploadFile } from 'ng-zorro-antd/upload';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
+/* nzUpload: Custom pre-upload checks */
+import { /*Observable,*/ Observer } from 'rxjs'; 
+/* nzUpload: Custom Upload request */
+import { HttpRequest, HttpClient, HttpEventType, HttpEvent, HttpResponse } from '@angular/common/http';
+import { NzUploadXHRArgs } from 'ng-zorro-antd/upload';
 
 @Component({
   selector: 'app-startup-submit-form',
@@ -13,6 +22,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class StartupSubmitFormComponent implements OnInit {
   @Input() startup?: Startup;
   @Input() id?:string | null ;
+  http: any;
   @Input() 
   public set isEditEnabled(v : boolean) {
     console.log(v);
@@ -31,6 +41,7 @@ export class StartupSubmitFormComponent implements OnInit {
   }
   
   private _isEditEnabled!: boolean;
+  private basePath = "/uploads"
 
   @Input() isAdd!: boolean;
   startupForm!: FormGroup;
@@ -41,7 +52,9 @@ export class StartupSubmitFormComponent implements OnInit {
     private fb: FormBuilder,
     private firebaseService: FirebaseService,
     private router: Router,
-    private storage: AngularFireStorage
+    private msg: NzMessageService,
+   
+    
   ) {}
 
   ngOnInit(): void {
@@ -104,4 +117,45 @@ export class StartupSubmitFormComponent implements OnInit {
       });
     }
   }
+
+  // handleChange(info: NzUploadChangeParam): void {
+  //   if (info.file.status !== 'uploading') {
+  //     console.log(info.file, info.fileList);
+  //   }
+  //   if (info.file.status === 'done') {
+  //     this.msg.success(`${info.file.name} file uploaded successfully`);
+  //   } else if (info.file.status === 'error') {
+  //     this.msg.error(`${info.file.name} file upload failed.`);
+  //   }
+  // }
+
+  setMediaUploadHeaders = (file: NzUploadFile) => {
+    return {
+      "Content-Type": "multipart/form-data",
+      "Accept": "application/json",
+    }
+  };
+//   customUploadReq = (item: NzUploadXHRArgs) => {
+//     const formData = new FormData();
+//     formData.append('file', item.file as any); // tslint:disable-next-line:no-any
+//     ///formData.append('id', '1000');
+//     const req = new HttpRequest('POST', item.action!, formData, {
+//       reportProgress : true,
+//       withCredentials: false
+//     });
+//     // Always return a `Subscription` object, nz-upload will automatically unsubscribe at the appropriate time
+//    return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
+//       if (event.type === HttpEventType.UploadProgress) {
+//         if (event.total! > 0) {
+//           (event as any).percent = event.loaded / event.total! * 100; // tslint:disable-next-line:no-any
+//         }
+//         // To process the upload progress bar, you must specify the `percent` attribute to indicate progress.
+//         item.onProgress!(event, item.file);
+//       } else if (event instanceof HttpResponse) { /* success */
+//         item.onSuccess!(event.body, item.file, event);
+//       }
+//     },(err: any) => { /* error */
+//       item.onError!(err, item.file);
+//     });
+// }
 }

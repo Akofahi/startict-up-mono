@@ -16,6 +16,9 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { AngularFireModule } from "@angular/fire/compat";
+import { provideStorage, getStorage } from '@angular/fire/storage';
+
 import { StartupSubmitFormComponent } from './startup-submit-form/startup-submit-form.component';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -34,6 +37,16 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 import { FirebaseService } from 'projects/libs/src/firebase.service';
 import { RequestsComponent } from './pages/requests/requests.component';
 import { RequestProfileComponent } from './pages/request-profile/request-profile.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
+
+import {
+  AngularFireStorageModule,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+  BUCKET,
+  
+} from "@angular/fire/compat/storage";
 
 
 registerLocaleData(en);
@@ -70,12 +83,13 @@ registerLocaleData(en);
     NzSpaceModule,
     NzButtonModule,
     NzNotificationModule,
-    NzSelectModule,
+    NzSelectModule,NzUploadModule,NzMessageModule,AngularFireStorageModule,AngularFireModule.initializeApp(environment.firebase, "your"),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideStorage(()=>getStorage())
   ],
-  providers: [FirebaseService, { provide: NZ_I18N, useValue: en_US }],
+  providers: [FirebaseService, { provide: NZ_I18N, useValue: en_US },{ provide: BUCKET, useValue: "your" }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
