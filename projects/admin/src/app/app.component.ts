@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   selectedFile: File = null as any;
   fb: any;
   downloadURL!: Observable<string>;
+  guard!:boolean;
   constructor(private firebaseService: FirebaseService,private storage: AngularFireStorage) {
 
   }
@@ -21,6 +22,7 @@ export class AppComponent implements OnInit {
   isCollapsed = false;
 
   ngOnInit(): void {
+    
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.firebaseService.requests.subscribe(res => {
@@ -37,30 +39,30 @@ export class AppComponent implements OnInit {
 
   //   this.firebaseService.addStartup(startup)
   }
-  onFileSelected(event:any) {
-    var n = Date.now();
-    const file = event.target.files[0];
-    const filePath = `RoomsImages/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, file);
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.fb = url;
-            }
-            console.log(this.fb);
-          });
-        })
-      )
-      .subscribe(url => {
-        if (url) {
-          console.log(url);
-        }
-      });
-  }
+  // onFileSelected(event:any) {
+  //   let n = Date.now() + ".jpg";
+  //   const file = event.target.files[0];
+  //   const filePath = `RoomsImages/${n}`;
+  //   const fileRef = this.storage.ref(filePath);
+  //   const task = this.storage.upload(`RoomsImages/${n}`, file);
+  //   task
+  //     .snapshotChanges()
+  //     .pipe(
+  //       finalize(() => {
+  //         this.downloadURL = fileRef.getDownloadURL();
+  //         this.downloadURL.subscribe(url => {
+  //           if (url) {
+  //             this.fb = url;
+  //           }
+  //           console.log(this.fb);
+  //         });
+  //       })
+  //     )
+  //     .subscribe(url => {
+  //       if (url) {
+  //         console.log(url);
+  //       }
+  //     });
+  // }
 
 }

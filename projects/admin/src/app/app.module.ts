@@ -47,6 +47,7 @@ import {
   BUCKET,
   
 } from "@angular/fire/compat/storage";
+import { LoginComponent } from './auth/login/login.component';
 
 
 registerLocaleData(en);
@@ -64,6 +65,7 @@ registerLocaleData(en);
     SectorFormComponent,
     RequestsComponent,
     RequestProfileComponent,
+    LoginComponent,
   
   ],
   imports: [
