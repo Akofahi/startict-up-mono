@@ -187,7 +187,7 @@
             "scripts": [
               "projects/public-web/src/assets/js/jq.js",
               "projects/public-web/src/assets/js/easing.js",
-              "projects/public-web/src/assets/bs.js",
+              "projects/public-web/src/assets/js/bs.js",
               "projects/public-web/src/assets/js/pop.js",
               "projects/public-web/src/assets/js/swiper.js",
               "projects/public-web/src/assets/js/script.js"
