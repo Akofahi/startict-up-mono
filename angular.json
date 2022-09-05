@@ -124,7 +124,7 @@
         }
       }
     },
-    "startict-up-web": {
+    "public-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -134,22 +134,22 @@
           "strict": true
         }
       },
-      "root": "projects/startict-up-web",
-      "sourceRoot": "projects/startict-up-web/src",
+      "root": "projects/public-web",
+      "sourceRoot": "projects/public-web/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/startict-up-web",
-            "index": "projects/startict-up-web/src/index.html",
-            "main": "projects/startict-up-web/src/main.ts",
-            "polyfills": "projects/startict-up-web/src/polyfills.ts",
-            "tsConfig": "projects/startict-up-web/tsconfig.app.json",
+            "outputPath": "dist/public-web",
+            "index": "projects/public-web/src/index.html",
+            "main": "projects/public-web/src/main.ts",
+            "polyfills": "projects/public-web/src/polyfills.ts",
+            "tsConfig": "projects/public-web/tsconfig.app.json",
             "inlineStyleLanguage": "less",
             "assets": [
-              "projects/startict-up-web/src/favicon.ico",
-              "projects/startict-up-web/src/assets",
+              "projects/public-web/src/favicon.ico",
+              "projects/public-web/src/assets",
               {
                 "glob": "**/*",
                 "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
@@ -157,11 +157,19 @@
               }
             ],
             "styles": [
-              "projects/startict-up-web/src/theme.less",
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/startict-up-web/src/styles.less"
+              "projects/public-web/src/assets/css/bs.css",
+              "projects/public-web/src/assets/css/fa.css",
+              "projects/public-web/src/assets/css/pop.css",
+              "projects/public-web/src/assets/css/swiper.css"
             ],
-            "scripts": []
+            "scripts": [
+              "projects/public-web/src/assets/js/jq.js",
+              "projects/public-web/src/assets/js/easing.js",
+              "projects/public-web/src/assets/bs.js",
+              "projects/public-web/src/assets/js/pop.js",
+              "projects/public-web/src/assets/js/swiper.js",
+              "projects/public-web/src/assets/js/script.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -179,8 +187,8 @@
               ],
               "fileReplacements": [
                 {
-                  "replace": "projects/startict-up-web/src/environments/environment.ts",
-                  "with": "projects/startict-up-web/src/environments/environment.prod.ts"
+                  "replace": "projects/public-web/src/environments/environment.ts",
+                  "with": "projects/public-web/src/environments/environment.prod.ts"
                 }
               ],
               "outputHashing": "all"
@@ -200,10 +208,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "startict-up-web:build:production"
+              "browserTarget": "public-web:build:production"
             },
             "development": {
-              "browserTarget": "startict-up-web:build:development"
+              "browserTarget": "public-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -211,24 +219,24 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "startict-up-web:build"
+            "browserTarget": "public-web:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/startict-up-web/src/test.ts",
-            "polyfills": "projects/startict-up-web/src/polyfills.ts",
-            "tsConfig": "projects/startict-up-web/tsconfig.spec.json",
-            "karmaConfig": "projects/startict-up-web/karma.conf.js",
+            "main": "projects/public-web/src/test.ts",
+            "polyfills": "projects/public-web/src/polyfills.ts",
+            "tsConfig": "projects/public-web/tsconfig.spec.json",
+            "karmaConfig": "projects/public-web/karma.conf.js",
             "inlineStyleLanguage": "less",
             "assets": [
-              "projects/startict-up-web/src/favicon.ico",
-              "projects/startict-up-web/src/assets"
+              "projects/public-web/src/favicon.ico",
+              "projects/public-web/src/assets"
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "projects/startict-up-web/src/styles.less"
+              "projects/public-web/src/styles.less"
             ],
             "scripts": []
           }
@@ -238,7 +246,7 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "startict-up-web:build:production",
+            "browserTarget": "public-web:build:production",
             "firebaseProject": "startict-up",
             "firebaseHostingSite": "startict-up"
           }
