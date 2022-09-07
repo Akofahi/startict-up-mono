@@ -12,7 +12,6 @@ import { NucleoiconsComponent } from './components/___/nucleoicons/nucleoicons.c
 const routes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full' },
     { path: 'index',                component: LandingComponent },
-    { path: 'login',                component: LoginComponent },
     { path: 'profile',              component: ProfileComponent },
     { path: 'components',           component: ComponentsComponent },
     { path: 'icons',                component: NucleoiconsComponent },
