@@ -9,6 +9,7 @@ import { SectorProfileComponent } from './pages/sector-profile/sector-profile.co
 import { SectorsComponent } from './pages/sectors/sectors.component';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 import { HomeComponent } from './pages/home/home.component';
+import { canActivate } from '@angular/fire/compat/auth-guard';
 
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
@@ -18,25 +19,26 @@ const redirectLoggedInToItems = () => redirectLoggedInTo(['home']);
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
-  {path: 'login', component: LoginComponent ,canActivate:[AngularFireAuthGuard],data: { authGuardPipe: redirectLoggedInToItems }},
+  { path: 'login', component: LoginComponent, ...canActivate(redirectLoggedInToItems) },
+  {
+    path: 'home', component: HomeComponent,  ...canActivate(redirectUnauthorizedToLogin) , children: [
+      { path: 'companies', component: CompaniesComponent },
+      { path: 'companies/add', component: CompanyProfileComponent },
+      { path: 'companies/:id', component: CompanyProfileComponent },
+      { path: 'sectors', component: SectorsComponent },
+      { path: 'sectors/add', component: SectorProfileComponent },
+      { path: 'sectors/:id', component: SectorProfileComponent },
+      { path: 'requests/:status', component: RequestsComponent },
+      { path: 'requests/profile/:id', component: RequestProfileComponent },
+    ]
+  }
 
-  {path:'home',component: HomeComponent,canActivate:[AngularFireAuthGuard],data: { authGuardPipe: redirectUnauthorizedToLogin },children:[
-    { path: 'companies', component: CompaniesComponent ,canActivate:[AngularFireAuthGuard]},
-    { path: 'companies/add', component: CompanyProfileComponent,canActivate:[AngularFireAuthGuard] },
-    { path: 'companies/:id', component: CompanyProfileComponent ,canActivate:[AngularFireAuthGuard]},
-    { path: 'sectors', component: SectorsComponent,canActivate:[AngularFireAuthGuard] },
-    { path: 'sectors/add', component: SectorProfileComponent ,canActivate:[AngularFireAuthGuard]},
-    { path: 'sectors/:id', component: SectorProfileComponent,canActivate:[AngularFireAuthGuard] },
-    { path: 'requests/:status', component: RequestsComponent ,canActivate:[AngularFireAuthGuard]},
-    { path: 'requests/profile/:id', component: RequestProfileComponent ,canActivate:[AngularFireAuthGuard]},
-  ]}
 
- 
- 
+
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})],
+  imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
