@@ -8,6 +8,8 @@ import { JwBootstrapSwitchNg2Module } from 'jw-bootstrap-switch-ng2';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
+import { StartupsListComponent } from '../components/startups-list/startups-list.component';
+import { StartupCardComponent } from '../components/startup-card/startup-card.component';
 
 @NgModule({
     imports: [
@@ -20,7 +22,9 @@ import { ProfileComponent } from './profile/profile.component';
     declarations: [
         LandingComponent,
         LoginComponent,
-        ProfileComponent
+        ProfileComponent,
+        StartupsListComponent,
+        StartupCardComponent
     ]
 })
 export class PagesModule { }
