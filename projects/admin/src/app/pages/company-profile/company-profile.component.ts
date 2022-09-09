@@ -44,7 +44,7 @@ export class CompanyProfileComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['/companies']);
+    this.router.navigate(['/home/companies']);
   }
 
   delete() {

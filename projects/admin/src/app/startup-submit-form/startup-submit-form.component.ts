@@ -91,7 +91,7 @@ export class StartupSubmitFormComponent implements OnInit {
   add(): void {
     if (this.startupForm.valid) {
       this.firebaseService.addStartup(this.startupForm.value).then(() => {
-        this.router.navigate(['/companies']);
+        this.router.navigate(['/home/companies']);
       });
     } else {
       Object.values(this.startupForm.controls).forEach((control) => {
@@ -106,7 +106,7 @@ export class StartupSubmitFormComponent implements OnInit {
   update(): void {
     if (this.startupForm.valid) {
       this.firebaseService.updateStartup(this.id!,this.startupForm.value).then(() => {
-        this.router.navigate(['/companies']);
+        this.router.navigate(['/home/companies']);
       });
     } else {
       Object.values(this.startupForm.controls).forEach((control) => {

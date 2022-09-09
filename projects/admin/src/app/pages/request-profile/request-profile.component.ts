@@ -56,6 +56,7 @@ export class RequestProfileComponent implements OnInit {
       email: [null, [Validators.required]],
       categorys: [null, [Validators.required]],
       sectors: [null, [Validators.required]],
+      status: [null, [Validators.required]]
     });
 
     this.id = this.route.snapshot.paramMap.get('id');
@@ -100,9 +101,9 @@ export class RequestProfileComponent implements OnInit {
     );
   }
   onBack() {
-    this.router.navigate(['/requests']);
+    this.router.navigate(['/home/requests/'+this.requestForm.get("status")?.value]);
   }
-
+  
   reject() {
     return this.firebaseService.updateRequest(this.id!,{status:'rejected'}).then(() => {
       this.onBack();
@@ -116,6 +117,7 @@ export class RequestProfileComponent implements OnInit {
   approve() {
     return this.firebaseService.updateRequest(this.id!,{status:'approved'}).then(() => {
       this.onBack();
+      this.firebaseService.addStartup(this.requestForm.value)
       this.notification.success(
         'Startup Approved Successfully',
         'This is the content of the notification. This is the content of the notification. This is the content of the notification.'

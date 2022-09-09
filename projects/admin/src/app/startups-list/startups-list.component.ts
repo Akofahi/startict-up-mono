@@ -42,6 +42,6 @@ export class StartupsListComponent implements OnInit {
     }
 
   goToAdd() {
-    this.router.navigate(['/companies/add']);
+    this.router.navigate(['/home/companies/add']);
   }
 }

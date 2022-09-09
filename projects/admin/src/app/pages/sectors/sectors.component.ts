@@ -23,7 +23,7 @@ export class SectorsComponent implements OnInit {
     })
   }
   goToAdd() {
-    this.router.navigate(['/sectors/add']);
+    this.router.navigate(['/home/sectors/add']);
   }
 
   search(searchValue:any){

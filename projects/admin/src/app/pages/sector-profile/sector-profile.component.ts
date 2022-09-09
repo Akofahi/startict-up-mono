@@ -43,7 +43,7 @@ export class SectorProfileComponent implements OnInit {
     }  
   }
   onBack() {
-    this.router.navigate(['/sectors']);
+    this.router.navigate(['/home/sectors']);
   }
 
 

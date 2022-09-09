@@ -68,7 +68,7 @@ export class SectorFormComponent implements OnInit {
   add(): void {
     if (this.sectorForm.valid) {
       this.firebaseService.addSector(this.sectorForm.value).then(() => {
-        // this.router.navigate(['/sectors']);
+        this.router.navigate(['/home/sectors']);
       });
     } else {
       Object.values(this.sectorForm.controls).forEach((control) => {
@@ -85,7 +85,7 @@ export class SectorFormComponent implements OnInit {
       this.firebaseService
         .updateSector(this.id!, this.sectorForm.value)
         .then(() => {
-          this.router.navigate(['/sectors']);
+          this.router.navigate(['/home/sectors']);
         });
     } else {
       Object.values(this.sectorForm.controls).forEach((control) => {
