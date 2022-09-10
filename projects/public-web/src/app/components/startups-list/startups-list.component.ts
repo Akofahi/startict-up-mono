@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FirebaseService } from 'projects/libs/src/firebase.service';
+import { Startup } from 'projects/libs/src/model';
 
 @Component({
     selector: 'app-startups-list',
@@ -7,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StartupsListComponent implements OnInit {
     focus;
-    constructor() {
+    constructor(private firebase: FirebaseService) {
     }
 
+    startups: Startup[] = []
+
     ngOnInit() {
-    
+        this.firebase.startups.subscribe((startups: Startup[]) => this.startups = startups)
     }
 }

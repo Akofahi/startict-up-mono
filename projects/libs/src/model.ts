@@ -1,6 +1,7 @@
 export interface Startup {
   id?: string;
   startupName: string;
+  description: string;
   logoImg: string;
   images: string[];
   designColor: string;
@@ -49,4 +50,7 @@ export interface Requests {
   status : 'rejected' | 'approved' |'pending';
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5435c1121b2e62c0f97f02f11051886f8c06dcef

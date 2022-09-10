@@ -1,21 +1,25 @@
-<div class="card">
+<div class="card" (click)="open()">
   <div class="card-header">
-    <img src="https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg" alt="rover" />
+    <img [src]="startup?.images?.[0] || ('https://via.placeholder.com/728x90.png?text=' + (startup.startupName || 'logo'))" alt="rover" />
   </div>
   <div class="card-body">
-    <span class="tag tag-teal">Technology</span>
+
+    <div class="tags">
+      <span class="tag tag-teal" *ngFor="let sector of startup.sectors">{{sector}}</span>
+    </div>
+    
     <h4>
-      Startup Name
+      {{startup.startupName}}
     </h4>
+    <i>{{startup.numberOfEmployees}}</i>
     <p>
-      An exploration into the truck's polarising design
+      {{startup.description}}
     </p>
     <div class="user">
-      <img src="https://yt3.ggpht.com/a/AGF-l7-0J1G0Ue0mcZMw-99kMeVuBmRxiPjyvIYONg=s900-c-k-c0xffffffff-no-rj-mo"
-        alt="user" />
+      <img *ngIf="startup.logoImg" [src]="startup.logoImg"
+        alt="logo" />
       <div class="user-info">
-        <h5>July Dec</h5>
-        <small>2h ago</small>
+        <h5>{{startup.city}}</h5>
       </div>
     </div>
   </div>

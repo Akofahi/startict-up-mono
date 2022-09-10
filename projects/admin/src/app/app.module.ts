@@ -89,8 +89,8 @@ registerLocaleData(en);
     NzNotificationModule,
     NzSelectModule,NzUploadModule,NzMessageModule,AngularFireStorageModule,AngularFireModule.initializeApp(environment.firebase, "cloud"),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideAuth(() => getAuth()),
     provideStorage(()=>getStorage())
   ],
   providers: [FirebaseService, { provide: NZ_I18N, useValue: en_US },{ provide: BUCKET, useValue: "startict-up.appspot.com" }],
