@@ -9,10 +9,11 @@ import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzUploadFile } from 'ng-zorro-antd/upload';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser'
 /* nzUpload: Custom pre-upload checks */
-import { /*Observable,*/ Observer } from 'rxjs'; 
+import { /*Observable,*/ finalize, Observable, Observer } from 'rxjs'; 
 /* nzUpload: Custom Upload request */
 import { HttpRequest, HttpClient, HttpEventType, HttpEvent, HttpResponse } from '@angular/common/http';
 import { NzUploadXHRArgs } from 'ng-zorro-antd/upload';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-startup-submit-form',
@@ -20,6 +21,8 @@ import { NzUploadXHRArgs } from 'ng-zorro-antd/upload';
   styleUrls: ['./startup-submit-form.component.less'],
 })
 export class StartupSubmitFormComponent implements OnInit {
+  urlBack: string;
+  downloadURL!:Observable<string>;  
   @Input() startup?: Startup;
   @Input() id?:string | null ;
   http: any;
@@ -53,6 +56,7 @@ export class StartupSubmitFormComponent implements OnInit {
     private firebaseService: FirebaseService,
     private router: Router,
     private msg: NzMessageService,
+    private storage: AngularFireStorage
    
     
   ) {}
@@ -135,27 +139,33 @@ export class StartupSubmitFormComponent implements OnInit {
       "Accept": "application/json",
     }
   };
-//   customUploadReq = (item: NzUploadXHRArgs) => {
-//     const formData = new FormData();
-//     formData.append('file', item.file as any); // tslint:disable-next-line:no-any
-//     ///formData.append('id', '1000');
-//     const req = new HttpRequest('POST', item.action!, formData, {
-//       reportProgress : true,
-//       withCredentials: false
-//     });
-//     // Always return a `Subscription` object, nz-upload will automatically unsubscribe at the appropriate time
-//    return this.http.request(req).subscribe((event: HttpEvent<{}>) => {
-//       if (event.type === HttpEventType.UploadProgress) {
-//         if (event.total! > 0) {
-//           (event as any).percent = event.loaded / event.total! * 100; // tslint:disable-next-line:no-any
-//         }
-//         // To process the upload progress bar, you must specify the `percent` attribute to indicate progress.
-//         item.onProgress!(event, item.file);
-//       } else if (event instanceof HttpResponse) { /* success */
-//         item.onSuccess!(event.body, item.file, event);
-//       }
-//     },(err: any) => { /* error */
-//       item.onError!(err, item.file);
-//     });
-// }
+
+  onFileSelected(event:any) {
+    let n = Date.now() + ".jpg";
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.urlBack = url;
+              this.startupForm.patchValue({logoImg:url})
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
+  
 }

@@ -49,7 +49,3 @@ export interface Requests {
   sectors: string[];
   status : 'rejected' | 'approved' |'pending';
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 456fecdec37c24aecc15e8f02daa5479fd5ea66f
