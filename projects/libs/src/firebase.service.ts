@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {
   deleteDoc,
   addDoc,
@@ -11,13 +12,14 @@ import {
   getDocs,
 } from '@angular/fire/firestore';
 
-import{getBlob,uploadBytes,} from '@angular/fire/storage';
-import { Observable } from 'rxjs';
+import { getBlob, uploadBytes, } from '@angular/fire/storage';
+import { map, Observable } from 'rxjs';
 import { Categorys, Requests, Sector, Startup } from './model';
 
 @Injectable()
 export class FirebaseService {
-  constructor(private afs: Firestore) {}
+  constructor(private afs: Firestore, private storage: AngularFireStorage
+  ) { }
 
   private startupCollectiopnRef = collection(this.afs, 'startups');
   private requestCollectiopnRef = collection(this.afs, 'requests');
@@ -34,6 +36,21 @@ export class FirebaseService {
 
   addSector(sector: Sector) {
     return addDoc(this.sectorCollectionRef, sector);
+  }
+
+  uploadImage(file: File) {
+    let n = Date.now() + ".jpg";
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(filePath, file);
+    return task
+      .snapshotChanges()
+      .pipe(
+        map(ref => {
+          const url: Observable<string> = fileRef.getDownloadURL();
+          return url
+        }
+        ))
   }
 
   //  getStartup(id:string){
@@ -74,7 +91,7 @@ export class FirebaseService {
     return await updateDoc(doc(this.afs, 'startups/' + id), startup as any);
   }
 
-  async updateRequest(id: string, request:Partial<Requests> ) {
+  async updateRequest(id: string, request: Partial<Requests>) {
     return await updateDoc(doc(this.afs, 'requests/' + id), request as any);
   }
   async updateSector(id: string, sector: Sector) {
