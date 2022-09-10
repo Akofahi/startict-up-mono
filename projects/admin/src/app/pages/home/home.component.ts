@@ -45,29 +45,29 @@ export class HomeComponent implements OnInit {
 
     //   this.firebaseService.addStartup(startup)
   }
-  // onFileSelected(event:any) {
-  //   let n = Date.now() + ".jpg";
-  //   const file = event.target.files[0];
-  //   const filePath = `RoomsImages/${n}`;
-  //   const fileRef = this.storage.ref(filePath);
-  //   const task = this.storage.upload(`RoomsImages/${n}`, file);
-  //   task
-  //     .snapshotChanges()
-  //     .pipe(
-  //       finalize(() => {
-  //         this.downloadURL = fileRef.getDownloadURL();
-  //         this.downloadURL.subscribe(url => {
-  //           if (url) {
-  //             this.fb = url;
-  //           }
-  //           console.log(this.fb);
-  //         });
-  //       })
-  //     )
-  //     .subscribe(url => {
-  //       if (url) {
-  //         console.log(url);
-  //       }
-  //     });
-  // }
+  onFileSelected(event:any) {
+    let n = Date.now() + ".jpg";
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
 }

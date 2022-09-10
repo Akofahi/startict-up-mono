@@ -1,6 +1,7 @@
 export interface Startup {
   id?: string;
   startupName: string;
+  description: string;
   logoImg: string;
   images: string[];
   designColor: string;
@@ -47,15 +48,5 @@ export interface Requests {
   email: string;
   sectors: string[];
   status : 'rejected' | 'approved' |'pending';
-}
-
-export class fileUpload{
-  key!: string;
-  name!: string;
-  url!: string;
-  file: File;
-  constructor(file: File) {
-    this.file = file;
-  }
 }
 

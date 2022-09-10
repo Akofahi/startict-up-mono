@@ -32,24 +32,10 @@
     <!-- ---------------------------- startup cards ---------------------------- -->
     <div class="row" style="margin-top: 3rem;">
 
-      <div class="col-md-6 col-xl-4">
-        <app-startup-card></app-startup-card>
+      <div *ngFor="let startup of startups" class="col-md-6 col-xl-4">
+        <app-startup-card [startup]="startup"></app-startup-card>
       </div>
-      <div class="col-md-6 col-xl-4">
-        <app-startup-card></app-startup-card>
-      </div>
-      <div class="col-md-6 col-xl-4">
-        <app-startup-card></app-startup-card>
-      </div>
-      <div class="col-md-6 col-xl-4">
-        <app-startup-card></app-startup-card>
-      </div>
-      <div class="col-md-6 col-xl-4">
-        <app-startup-card></app-startup-card>
-      </div>
-      <div class="col-md-6 col-xl-4">
-        <app-startup-card></app-startup-card>
-      </div>
+    
     </div>
   </div>
 </div>
