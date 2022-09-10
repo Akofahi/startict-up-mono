@@ -14,12 +14,15 @@
           <input  nz-input formControlName="startupName" />
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-label  nzRequired nzFor="logoImg">logoImg</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="logoImg" />
-        </nz-form-control>
-      </nz-form-item>
+      <div class="form-group col-12">
+        <input type="file"
+        id="file"
+        #userPhoto
+        (change)="onFileSelected($event)"
+        name="image"
+        autocomplete="off"
+        />
+       </div>
       <nz-form-item>
         <nz-form-label  nzRequired nzFor="images">CEO Name</nz-form-label>
         <nz-form-control  nzErrorTip="The input is not valid E-mail!">

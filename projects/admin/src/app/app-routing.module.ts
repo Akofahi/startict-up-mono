@@ -12,8 +12,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { canActivate } from '@angular/fire/compat/auth-guard';
 
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToItems = () => redirectLoggedInTo(['home']);
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
+const redirectLoggedInToItems = () => redirectLoggedInTo(['/home/companies']);
 
 
 

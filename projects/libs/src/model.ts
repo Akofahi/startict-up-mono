@@ -49,13 +49,4 @@ export interface Requests {
   status : 'rejected' | 'approved' |'pending';
 }
 
-export class fileUpload{
-  key!: string;
-  name!: string;
-  url!: string;
-  file: File;
-  constructor(file: File) {
-    this.file = file;
-  }
-}
 

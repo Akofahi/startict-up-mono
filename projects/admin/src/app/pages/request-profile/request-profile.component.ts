@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FirebaseService } from '../../../../../libs/src/firebase.service';
 import { Categorys, Sector } from 'projects/libs/src/model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize, Observable } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-request-profile',
@@ -16,11 +18,12 @@ export class RequestProfileComponent implements OnInit {
   categorySelected: any;
   filteredSectors: Sector[] = [];
   categorysList = Object.keys(Categorys).filter((v) => isNaN(Number(v)));
-  
+  urlBack : any;
   id!: string | null;
   profile!: any;
   isEditEnabled: boolean = false;
   isAdd: boolean = false;
+  downloadURL! :Observable<string>;
 
   public get title(): string {
     return this.profile?.ceo ? this.profile.ceo : 'Add new Request';
@@ -31,7 +34,8 @@ export class RequestProfileComponent implements OnInit {
     private firebaseService: FirebaseService,
     private router: Router,
     private route: ActivatedRoute,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private storage : AngularFireStorage
   ) {}
 
   ngOnInit(): void {
@@ -124,4 +128,32 @@ export class RequestProfileComponent implements OnInit {
       );
     });
   }
+
+  onFileSelected(event:any) {
+    let n = Date.now() + ".jpg";
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.urlBack = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
+
+  
 }
