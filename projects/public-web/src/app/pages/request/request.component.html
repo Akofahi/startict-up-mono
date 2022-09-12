@@ -1,0 +1,167 @@
+<div class="wrapper">
+    <div class="page-header page-header-small" filter-color="orange">
+        <div class="page-header-image rellax-header" data-rellax-speed="-8"
+            style="background-image: url('assets/img/bg5.jpg') ;">
+        </div>
+        <div class="container">
+            <div class="content-center">
+                <h3 class="title">Create your startup</h3>
+                <p class="category">create your startup now</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2>
+                Fill the form below to create your startup
+            </h2>
+            <form [formGroup]="form">
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Startup Name</label>
+                            <input formArrayName="startupName" type="text" value="" placeholder="Startup Name" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Founder Name</label>
+                            <input formControlName="founderName" type="text" value="" placeholder="Founder Name" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input formArrayName="email" type="text" value="" placeholder="Email Address" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Years of Extablishment</label>
+                            <input formControlName="yearOfEstablishment" type="number" step="1" min="0" placeholder="Years of Extablishment"
+                                class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Startup description</label>
+                            <textarea formArrayName="description" class="form-control" rows="3" placeholder="Startup description"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Number of Employees</label>
+                            <select formArrayName="numberOfEmployees" class="form-control">
+                                <option>1 - 10</option>
+                                <option>50 - 100</option>
+                                <option>100 - 500</option>
+                                <option>1000 - 5000</option>
+                                <option>> 5000</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label formControlName="sectors">Sector</label>
+                            <select class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Brand Color</label>
+                            <input formArrayName="designColor" type="color" value="" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>City</label>
+                            <select formControlName="city" class="form-control">
+                                <option>Amman</option>
+                                <option>Irbid</option>
+                                <option>Zarqa</option>
+                                <option>Aqaba</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Website URL</label>
+                            <input formControlName="websiteURL" type="text" value="" placeholder="Website URL" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Logo</label>
+                            <input type="file" value="" (change)="onFileSelected($event, 'logo')" placeholder="Upload Logo" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Images</label>
+                            <input type="file" value=""  (change)="onFileSelected($event, 'image')" placeholder="Upload Images" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <button (click)="submit()" class="btn btn-primary btn-lg">Submit Request</button>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer footer-default">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li>
+                        <a href="https://www.creative-tim.com">
+                            Creative Tim
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.creative-tim.com/about-us">
+                            About Us
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://blog.creative-tim.com">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md">
+                            MIT License
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright">
+                &copy;
+                <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+                <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+            </div>
+        </div>
+    </footer>
+</div>
