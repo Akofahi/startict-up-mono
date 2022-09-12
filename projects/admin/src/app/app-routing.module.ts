@@ -7,7 +7,7 @@ import { RequestProfileComponent } from './pages/request-profile/request-profile
 import { RequestsComponent } from './pages/requests/requests.component';
 import { SectorProfileComponent } from './pages/sector-profile/sector-profile.component';
 import { SectorsComponent } from './pages/sectors/sectors.component';
-import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
+import { redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 import { HomeComponent } from './pages/home/home.component';
 import { canActivate } from '@angular/fire/compat/auth-guard';
 
@@ -15,7 +15,6 @@ import { canActivate } from '@angular/fire/compat/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
 const redirectLoggedInToItems = () => redirectLoggedInTo(['/home/companies']);
-
 
 
 const routes: Routes = [

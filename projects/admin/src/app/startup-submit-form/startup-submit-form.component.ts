@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FirebaseService } from '../../../../libs/src/firebase.service';
-import { Startup } from '../../../../libs/src/model';
+import { Categorys, Sector, Startup } from '../../../../libs/src/model';
 import { NzUploadChangeParam } from 'ng-zorro-antd/upload';
 import { NzMessageService } from 'ng-zorro-antd/message';
 /* nzUpload: Upload */
@@ -23,6 +23,11 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class StartupSubmitFormComponent implements OnInit {
   urlBack: string;
   downloadURL!:Observable<string>;  
+  sectorsData!: Sector[];
+  
+  categorySelected: any;
+  filteredSectors: Sector[] = [];
+  categorysList = Object.keys(Categorys).filter((v) => isNaN(Number(v)));
   @Input() startup?: Startup;
   @Input() id?:string | null ;
   http: any;
@@ -62,10 +67,18 @@ export class StartupSubmitFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.firebaseService.getSectors().then((res) => {
+      console.log(res);
+    });
+    console.log('categorysList', this.categorysList);
+
+    this.firebaseService.sectors.subscribe((res) => {
+      this.sectorsData = res as any;
+    });
     this.startupForm = this.fb.group({
       startupName: [null, [Validators.required]],
       logoImg: [null, [Validators.required]],
-      images : [null,[Validators.required]],
+      categorys: [null, [Validators.required]],
       designColor : [null,[Validators.required]],
       city : [null,[Validators.required]],
       founderName : [null,[Validators.required]],
@@ -167,5 +180,15 @@ export class StartupSubmitFormComponent implements OnInit {
       });
   }
 
+  
+  getImage(){
+    return this.startupForm.get('logoImg').value
+  }
+  updateSectorsCat() {
+    const category = this.startupForm.get('categorys')?.value;
+    this.filteredSectors = this.sectorsData?.filter(
+      (v) => v.category == category
+    );
+  }
   
 }

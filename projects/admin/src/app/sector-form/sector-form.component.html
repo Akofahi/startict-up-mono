@@ -13,6 +13,32 @@
      </nz-select>
     </nz-form-control>
   </nz-form-item>
+
+  <nz-form-item nzRequired nzFor="sectorLogo">
+    <nz-form-label  nzRequired nzFor="sectorLogo">Sector Logo</nz-form-label>
+    <nz-form-control  nzErrorTip="The input is not valid Sector Logo!">
+    <div class="form-group col-12" >
+      <input nz-input formControlName="sectorLogo" type="file"
+      id="file"
+      #userPhoto
+      (change)="onFileSelected($event)"
+      name="image"
+      autocomplete="off"
+      />
+     </div>
+     <div>
+      <img [src]="getImage()" alt="No img" class="imgPreview">
+     </div>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label nzRequired nzFor="designColor">Design Color</nz-form-label>
+    <nz-form-control nzErrorTip="The input is not valid Design Color!">
+      <input type='color' nz-input formControlName="designColor" />
+    </nz-form-control>
+  </nz-form-item>
+
   <nz-form-item>
     <nz-form-control>
       <button *ngIf="isAdd || isEditEnabled" nz-button nzType="primary">{{btnLabel}}</button>

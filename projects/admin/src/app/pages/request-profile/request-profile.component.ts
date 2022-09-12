@@ -50,7 +50,7 @@ export class RequestProfileComponent implements OnInit {
     this.requestForm = this.fb.group({
       startupName: [null, [Validators.required]],
       logoImg: [null, [Validators.required]],
-      images: [null, [Validators.required]],
+      description: [null, [Validators.required]],
       designColor: [null, [Validators.required]],
       city: [null, [Validators.required]],
       founderName: [null, [Validators.required]],
@@ -129,32 +129,37 @@ export class RequestProfileComponent implements OnInit {
     });
   }
 
-  // onFileSelected(event:any) {
-  //   let n = Date.now() + ".jpg";
-  //   const file = event.target.files[0];
-  //   const filePath = `RoomsImages/${n}`;
-  //   const fileRef = this.storage.ref(filePath);
-  //   const task = this.storage.upload(`RoomsImages/${n}`, file);
-  //   task
-  //     .snapshotChanges()
-  //     .pipe(
-  //       finalize(() => {
-  //         this.downloadURL = fileRef.getDownloadURL();
-  //         this.downloadURL.subscribe(url => {
-  //           if (url) {
-  //             this.urlBack = url;
-  //             this.requestForm.patchValue({logoImg:this.urlBack})
-  //           }
-  //           console.log(this.fb);
-  //         });
-  //       })
-  //     )
-  //     .subscribe(url => {
-  //       if (url) {
-  //         console.log(url);
-  //       }
-  //     });
-  // }
+  onFileSelected(event:any) {
+    let n = Date.now() + ".jpg";
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.urlBack = url;
+              this.requestForm.patchValue({logoImg:url})
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log(url);
+        }
+      });
+  }
 
+  
+  getImage(){
+    return this.requestForm.get('logoImg').value
+  }
+  
   
 }

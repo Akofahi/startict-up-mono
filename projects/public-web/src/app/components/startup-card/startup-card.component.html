@@ -1,26 +1,29 @@
 <div class="card" (click)="open()">
   <div class="card-header">
-    <img [src]="startup?.images?.[0] || ('https://via.placeholder.com/728x90.png?text=' + (startup.startupName || 'logo'))" alt="rover" />
+   <div style="height:90px; width:728px; background-color: {{startup.designColor}};"></div>
   </div>
   <div class="card-body">
-
-    <div class="tags">
-      <span class="tag tag-teal" *ngFor="let sector of startup.sectors">{{sector}}</span>
-    </div>
-    
-    <h4>
-      {{startup.startupName}}
-    </h4>
-    <i>{{startup.numberOfEmployees}}</i>
-    <p>
-      {{startup.description}}
-    </p>
     <div class="user">
       <img *ngIf="startup.logoImg" [src]="startup.logoImg"
         alt="logo" />
       <div class="user-info">
-        <h5>{{startup.city}}</h5>
+        <h5>{{startup.startupName}}</h5>
       </div>
     </div>
+    <h4>
+      {{startup.description}}
+    </h4>
+    <div class="tags">
+      <span class="tag tag-teal" *ngFor="let sector of startup.sectors">
+        <span></span>
+      </span>
+    </div>
+    
+
+    <i>{{startup.numberOfEmployees}}</i>
+    <p>
+      {{startup.description}}
+    </p>
+    
   </div>
 </div>

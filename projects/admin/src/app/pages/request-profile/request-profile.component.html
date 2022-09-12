@@ -14,59 +14,70 @@
           <input  nz-input formControlName="startupName" />
         </nz-form-control>
       </nz-form-item>
-      <!-- <div class="form-group col-12">
-        <input type="file"
-        id="file"
-        #userPhoto
-        (change)="onFileSelected($event)"
-        name="image"
-        autocomplete="off"
-        />
-       </div> -->
-      <nz-form-item>
-        <nz-form-label  nzRequired nzFor="images">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
-          <input nz-input formControlName="images" />
+
+      <nz-form-item nzRequired nzFor="logoImg">
+        <nz-form-label  nzRequired nzFor="logoImg">Logo Image</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid Logo Image!">
+        <div class="form-group col-12" >
+          <input nz-input formControlName="logoImg" type="file"
+          id="file"
+          #userPhoto
+          (change)="onFileSelected($event)"
+          name="image"
+          autocomplete="off"
+          />
+         </div>
+         <div>
+          <img [src]="getImage()" alt="No img" class="imgPreview">
+         </div>
         </nz-form-control>
       </nz-form-item>
+      
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="designColor">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+        <nz-form-label  nzRequired nzFor="description">Description</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid description!">
+          <input type='textarea' nz-input formControlName="description" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label  nzRequired nzFor="designColor">Design Color</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid Design Color!">
           <input type='color' nz-input formControlName="designColor" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="city">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+        <nz-form-label  nzRequired nzFor="city">City</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid City!">
           <input nz-input formControlName="city" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="founderName">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+        <nz-form-label  nzRequired nzFor="founderName">Founder Name</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid Founder Name!">
           <input nz-input formControlName="founderName" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="numberOfEmployees">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+        <nz-form-label  nzRequired nzFor="numberOfEmployees">Number of Employees</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid Number of Employees!">
           <input nz-input formControlName="numberOfEmployees" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="yearOfEstablishment">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+        <nz-form-label  nzRequired nzFor="yearOfEstablishment">Year of Establishment</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid Year of Establishment!">
           <input nz-input formControlName="yearOfEstablishment" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="websiteURL">CEO Name</nz-form-label>
-        <nz-form-control  nzErrorTip="The input is not valid E-mail!">
+        <nz-form-label  nzRequired nzFor="websiteURL">Website URL</nz-form-label>
+        <nz-form-control  nzErrorTip="The input is not valid Website URL!">
           <input nz-input formControlName="websiteURL" />
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
-        <nz-form-label  nzRequired nzFor="email">CEO Name</nz-form-label>
+        <nz-form-label  nzRequired nzFor="email">Email</nz-form-label>
         <nz-form-control  nzErrorTip="The input is not valid E-mail!">
           <input nz-input formControlName="email" />
         </nz-form-control>

@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       this.auth.SignIn(this.validateForm.get('userName')?.value,this.validateForm.get('password')?.value);
+      
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
         if (control.invalid) {

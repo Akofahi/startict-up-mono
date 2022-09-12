@@ -15,7 +15,7 @@ export class AuthService {
   }
    /* Sign in */
  SignIn(email: string, password: string) {
-  this.angularFireAuth
+  return this.angularFireAuth
   .signInWithEmailAndPassword(email, password)
   .then(res => {
   console.log('You\'re in!');

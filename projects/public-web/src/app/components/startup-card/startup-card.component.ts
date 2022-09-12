@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Startup } from 'projects/libs/src/model';
+import { FirebaseService } from 'projects/libs/src/firebase.service';
+import { Sector, Startup } from 'projects/libs/src/model';
 
 @Component({
     selector: 'app-startup-card',
@@ -8,14 +9,17 @@ import { Startup } from 'projects/libs/src/model';
     styleUrls: ['./startup-card.component.scss']
 })
 export class StartupCardComponent implements OnInit {
-
+    sectors: Sector[] ;
     @Input() startup: Startup;
     
     focus;
-    constructor(private router: Router) {
+    constructor(private router: Router,private fbs: FirebaseService) {
     }
 
     ngOnInit() {
+     this.fbs.getSectors().then(x => {
+     this.sectors = x as any;
+     })
     
     }
 
