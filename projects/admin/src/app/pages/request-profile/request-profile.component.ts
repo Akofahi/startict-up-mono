@@ -18,12 +18,12 @@ export class RequestProfileComponent implements OnInit {
   categorySelected: any;
   filteredSectors: Sector[] = [];
   categorysList = Object.keys(Categorys).filter((v) => isNaN(Number(v)));
-  urlBack : any;
+  urlBack: any;
   id!: string | null;
   profile!: any;
   isEditEnabled: boolean = false;
   isAdd: boolean = false;
-  downloadURL! :Observable<string>;
+  downloadURL!: Observable<string>;
 
   public get title(): string {
     return this.profile?.ceo ? this.profile.ceo : 'Add new Request';
@@ -35,13 +35,13 @@ export class RequestProfileComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private notification: NzNotificationService,
-    private storage : AngularFireStorage
+    private storage: AngularFireStorage
   ) {}
 
   ngOnInit(): void {
-    this.firebaseService.getSectors().then((res) => {
-      console.log(res);
-    });
+    // this.firebaseService.getSectors().then((res) => {
+    //   // console.log(res);
+    // });
     console.log('categorysList', this.categorysList);
 
     this.firebaseService.sectors.subscribe((res) => {
@@ -60,7 +60,7 @@ export class RequestProfileComponent implements OnInit {
       email: [null, [Validators.required]],
       categorys: [null, [Validators.required]],
       sectors: [null, [Validators.required]],
-      status: [null, [Validators.required]]
+      status: [null, [Validators.required]],
     });
 
     this.id = this.route.snapshot.paramMap.get('id');
@@ -68,7 +68,7 @@ export class RequestProfileComponent implements OnInit {
       this.firebaseService.getRequests(this.id!).then((res: any) => {
         this.profile = res as any;
         console.log(res);
-        const sectors = this.profile.sectors.map((v: any) => v.id);       
+        const sectors = this.profile.sectors.map((v: any) => v.id);
         console.log('sectors', sectors);
         this.requestForm.patchValue({
           ...this.profile!,
@@ -78,13 +78,15 @@ export class RequestProfileComponent implements OnInit {
         setTimeout(() => {
           this.updateSectorsCat();
         }, 500);
-        if(this.profile.status=='approved' || this.profile.status=='rejected'){
+        if (
+          this.profile.status == 'approved' ||
+          this.profile.status == 'rejected'
+        ) {
           this.requestForm.disable();
         }
       });
     }
   }
-  
 
   add(): void {
     if (this.requestForm.valid) {
@@ -105,32 +107,38 @@ export class RequestProfileComponent implements OnInit {
     );
   }
   onBack() {
-    this.router.navigate(['/home/requests/'+this.requestForm.get("status")?.value]);
+    this.router.navigate([
+      '/home/requests/' + this.requestForm.get('status')?.value,
+    ]);
   }
-  
+
   reject() {
-    return this.firebaseService.updateRequest(this.id!,{status:'rejected'}).then(() => {
-      this.onBack();
-      this.notification.success(
-        'Startup Deleted Successfully',
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
-      );
-    });
+    return this.firebaseService
+      .updateRequest(this.id!, { status: 'rejected' })
+      .then(() => {
+        this.onBack();
+        this.notification.success(
+          'Startup Deleted Successfully',
+          'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
+        );
+      });
   }
 
   approve() {
-    return this.firebaseService.updateRequest(this.id!,{status:'approved'}).then(() => {
-      this.onBack();
-      this.firebaseService.addStartup(this.requestForm.value)
-      this.notification.success(
-        'Startup Approved Successfully',
-        'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
-      );
-    });
+    return this.firebaseService
+      .updateRequest(this.id!, { status: 'approved' })
+      .then(() => {
+        this.onBack();
+        this.firebaseService.addStartup(this.requestForm.value);
+        this.notification.success(
+          'Startup Approved Successfully',
+          'This is the content of the notification. This is the content of the notification. This is the content of the notification.'
+        );
+      });
   }
 
-  onFileSelected(event:any) {
-    let n = Date.now() + ".jpg";
+  onFileSelected(event: any) {
+    let n = Date.now() + '.jpg';
     const file = event.target.files[0];
     const filePath = `RoomsImages/${n}`;
     const fileRef = this.storage.ref(filePath);
@@ -140,26 +148,23 @@ export class RequestProfileComponent implements OnInit {
       .pipe(
         finalize(() => {
           this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
+          this.downloadURL.subscribe((url) => {
             if (url) {
               this.urlBack = url;
-              this.requestForm.patchValue({logoImg:url})
+              this.requestForm.patchValue({ logoImg: url });
             }
             console.log(this.fb);
           });
         })
       )
-      .subscribe(url => {
+      .subscribe((url) => {
         if (url) {
           console.log(url);
         }
       });
   }
 
-  
-  getImage(){
-    return this.requestForm.get('logoImg').value
+  getImage() {
+    return this.requestForm.get('logoImg').value;
   }
-  
-  
 }

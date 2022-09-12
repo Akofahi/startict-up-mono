@@ -87,6 +87,7 @@ export class StartupSubmitFormComponent implements OnInit {
       websiteURL : [null,[Validators.required]],
       email : [null,[Validators.required]],
       sectors : [null,[Validators.required]],
+      description : [null,[Validators.required]],
     });
 
     if (this.isAdd) {

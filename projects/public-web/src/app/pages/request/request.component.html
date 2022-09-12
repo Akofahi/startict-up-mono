@@ -22,7 +22,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Startup Name</label>
-                            <input formArrayName="startupName" type="text" value="" placeholder="Startup Name" class="form-control" />
+                            <input formControlName="startupName" formArrayName="startupName" type="text" value="" placeholder="Startup Name" class="form-control" />
                         </div>
                     </div>
 
@@ -57,6 +57,25 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label>Category</label>
+                            <select (ngModelChange)="updateSectorsCat()" formControlName="categorys" class="form-control">
+                                <option *ngFor="let item of categorysList" [label]="item" [ngValue]="item"></option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6">
+                        <div class="form-group" *ngIf="form.get('categorys')?.value">
+                            <label >Sector</label>
+                            <select formControlName="sectors" class="form-control" multiple>
+                                <option *ngFor="let item of filteredSectors" [label]="item.sectorName" [ngValue]="item.id"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
                             <label>Number of Employees</label>
                             <select formArrayName="numberOfEmployees" class="form-control">
                                 <option>1 - 10</option>
@@ -64,18 +83,6 @@
                                 <option>100 - 500</option>
                                 <option>1000 - 5000</option>
                                 <option>> 5000</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label formControlName="sectors">Sector</label>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
                             </select>
                         </div>
                     </div>
