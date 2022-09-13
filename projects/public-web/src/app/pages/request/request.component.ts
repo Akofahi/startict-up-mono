@@ -55,6 +55,8 @@ export class RequestComponent implements OnInit {
     if (!this.form.valid) {
       // todo notify user for invalid fields
       console.log(this.form.errors);
+      console.log(this.form.value);
+      
 
       // return;
     }

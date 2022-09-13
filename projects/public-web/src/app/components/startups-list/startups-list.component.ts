@@ -15,6 +15,9 @@ export class StartupsListComponent implements OnInit {
     startups: Startup[] = []
 
     ngOnInit() {
-        this.firebase.startups.subscribe((startups: Startup[]) => this.startups = startups)
+        this.firebase.startups.subscribe((startups: Startup[]) => {
+            this.startups = startups;
+            console.log('startups', this.startups);
+        })
     }
 }

@@ -36,7 +36,7 @@ export class RequestProfileComponent implements OnInit {
     private route: ActivatedRoute,
     private notification: NzNotificationService,
     private storage: AngularFireStorage
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // this.firebaseService.getSectors().then((res) => {
@@ -50,6 +50,7 @@ export class RequestProfileComponent implements OnInit {
     this.requestForm = this.fb.group({
       startupName: [null, [Validators.required]],
       logoImg: [null, [Validators.required]],
+      images: [null, []],
       description: [null, [Validators.required]],
       designColor: [null, [Validators.required]],
       city: [null, [Validators.required]],
@@ -67,17 +68,10 @@ export class RequestProfileComponent implements OnInit {
     if (this.id) {
       this.firebaseService.getRequests(this.id!).then((res: any) => {
         this.profile = res as any;
-        console.log(res);
-        const sectors = this.profile.sectors.map((v: any) => v.id);
-        console.log('sectors', sectors);
+        console.log('request', res);
         this.requestForm.patchValue({
           ...this.profile!,
-          sectors,
         });
-
-        setTimeout(() => {
-          this.updateSectorsCat();
-        }, 500);
         if (
           this.profile.status == 'approved' ||
           this.profile.status == 'rejected'
@@ -90,7 +84,7 @@ export class RequestProfileComponent implements OnInit {
 
   add(): void {
     if (this.requestForm.valid) {
-      this.firebaseService.addRequest(this.requestForm.value).then(() => {});
+      this.firebaseService.addRequest(this.requestForm.value).then(() => { });
     } else {
       Object.values(this.requestForm.controls).forEach((control) => {
         if (control.invalid) {

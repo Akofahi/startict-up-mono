@@ -7,7 +7,7 @@
     </nz-page-header-extra>
   </nz-page-header>
   
-  <form nz-form  [formGroup]="requestForm" (ngSubmit)="add()">
+  <form nz-form nzLayout="vertical"  [formGroup]="requestForm" (ngSubmit)="add()">
       <nz-form-item>
         <nz-form-label  nzRequired nzFor="startupName">Company Name</nz-form-label>
         <nz-form-control  nzErrorTip="The input is not valid E-mail!">
@@ -19,8 +19,7 @@
         <nz-form-label  nzRequired nzFor="logoImg">Logo Image</nz-form-label>
         <nz-form-control  nzErrorTip="The input is not valid Logo Image!">
         <div class="form-group col-12" >
-          <input nz-input formControlName="logoImg" type="file"
-          id="file"
+          <input nz-input type="file"
           #userPhoto
           (change)="onFileSelected($event)"
           name="image"
