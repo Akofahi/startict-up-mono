@@ -4,6 +4,7 @@ import { map, finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AuthService } from 'projects/libs/src/auth.service';
+import { Router } from '@angular/router';
 
 
 
@@ -21,13 +22,16 @@ export class HomeComponent implements OnInit {
   constructor(
     private firebaseService: FirebaseService,
     private storage: AngularFireStorage,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {}
 
   isCollapsed = false;
 
   Signout(){
-  this.auth.SignOut();
+  this.auth.SignOut().then(()=>{
+    this.router.navigate(['/login'])
+  });
   }  
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.

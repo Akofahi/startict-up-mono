@@ -40,9 +40,7 @@ export class AuthService {
   
   /* Sign out */
   SignOut() {
-    this.angularFireAuth.authState
-  this.angularFireAuth
-  .signOut();
-  console.log('went out');
+   return this.angularFireAuth.signOut();
+  
   }
 }
