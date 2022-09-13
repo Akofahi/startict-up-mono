@@ -9,7 +9,7 @@
 <nz-list nzItemLayout="horizontal">
   
   <nz-input-group nzSearch nzSize="large" [nzAddOnAfter]="suffixButton">
-    <input type="text" nz-input placeholder="input search text" id="searchValue" name="searchValue" #searchValue />
+    <input (key.enter)="search(searchValue.value)" type="text" nz-input placeholder="input search text" id="searchValue" name="searchValue" #searchValue />
   </nz-input-group>
   <ng-template #suffixButton>
     <button nz-button nzType="primary" nzSize="large" nzSearch (click)="search(searchValue.value)">Search</button>
