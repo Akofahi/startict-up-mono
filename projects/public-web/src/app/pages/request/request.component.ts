@@ -37,7 +37,7 @@ export class RequestComponent implements OnInit {
       city: ['', [Validators.required]],
       sectors: [null, [Validators.required]],
       images: [[]],
-      logoImg: [''],
+      logoImg: [null, [Validators.required]],
       categorys: [null, [Validators.required]],
       
     });
