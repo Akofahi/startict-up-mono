@@ -9,18 +9,13 @@ import { Sector, Startup } from 'projects/libs/src/model';
     styleUrls: ['./startup-card.component.scss']
 })
 export class StartupCardComponent implements OnInit {
-    sectors: Sector[] ;
-    @Input() startup: Startup;
-    
+    @Input() startup: Startup;    
+    @Input() sectors: Record<string, Sector>;    
     focus;
     constructor(private router: Router,private fbs: FirebaseService) {
     }
 
     ngOnInit() {
-     this.fbs.getSectors().then(x => {
-     this.sectors = x as any;
-     })
-    
     }
 
     open() {

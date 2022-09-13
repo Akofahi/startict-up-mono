@@ -11,31 +11,31 @@
               <i class="fa fa-search"></i>
             </span>
           </div>
-          <input type="text" class="form-control" placeholder="Type to search..." (focus)="focus=true"
-            (blur)="focus=false">
+          <input [formControl]="searchControl" type="text" class="form-control" placeholder="Type to search..."
+            (focus)="focus=true" (blur)="focus=false">
         </div>
       </div>
     </div>
 
     <!-- -------------------------------- pills -------------------------------- -->
     <div style="display: flex;flex-direction: row;gap: 10px;flex-wrap: wrap;margin-top: 1rem;">
-      <span class="badge badge-default">Primary</span>
-
-      <span class="badge badge-primary">Primary</span>
-
-      <span class="badge badge-default">Primary</span>
-
-      <span class="badge badge-default">Primary</span>
-
+      <span class="badge badge-default" *ngFor="let sector of sectors | keyvalue"
+        [ngStyle]="{'background-color': filterSector == sector.key ? sector.value.designColor: ''}"
+        (click)="filterBySectors(sector.key)">{{sector.key}}</span>
     </div>
 
     <!-- ---------------------------- startup cards ---------------------------- -->
     <div class="row" style="margin-top: 3rem;">
 
-      <div *ngFor="let startup of startups" class="col-md-6 col-xl-4">
-        <app-startup-card [startup]="startup"></app-startup-card>
+      <div *ngFor="let startup of filteredStartups" class="col-md-6 col-xl-4">
+        <app-startup-card [startup]="startup" [sectors]="sectors"></app-startup-card>
       </div>
-    
+
+      <div *ngIf="!filteredStartups?.length" class="text-center w-100">
+       <b> No results found</b>
+
+      </div>
+
     </div>
   </div>
 </div>

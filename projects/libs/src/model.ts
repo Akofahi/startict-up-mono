@@ -11,7 +11,7 @@ export interface Startup {
   yearOfEstablishment: string;
   websiteURL: string;
   email: string;
-  sectors: Sector[];
+  sectors: string[];
 }
 
 export enum Categorys{

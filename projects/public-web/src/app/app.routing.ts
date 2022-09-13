@@ -12,7 +12,7 @@ import { RequestComponent } from './pages/request/request.component';
 const routes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full' },
     { path: 'index',                component: LandingComponent },
-    { path: 'profile',              component: ProfileComponent },
+    { path: 'profile/:id',          component: ProfileComponent },
     { path: 'request',              component: RequestComponent },
     { path: 'components',           component: ComponentsComponent },
     { path: 'icons',                component: NucleoiconsComponent },

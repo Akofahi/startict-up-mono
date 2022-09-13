@@ -2,7 +2,7 @@
   "targets": {
     "startict-up": {
       "hosting": {
-        "startict-up-web": [
+        "public-web": [
           "startict-up"
         ]
       }
