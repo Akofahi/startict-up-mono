@@ -16,7 +16,7 @@ export interface Startup {
 
 export enum Categorys{
   "Software" = 0,
-  "Devices Infrastucture" = 1,
+  "Devices Infrastructure" = 1,
   "IT Business Services" = 2,
   "Emerging Tech" = 3,
   'TelecomServices' = 4
