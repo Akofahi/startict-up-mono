@@ -13,6 +13,7 @@ import {
 } from '@angular/fire/firestore';
 
 import { getBlob, uploadBytes, } from '@angular/fire/storage';
+import { setDoc } from 'firebase/firestore';
 import { map, Observable } from 'rxjs';
 import { Categorys, Requests, Sector, Startup } from './model';
 
@@ -35,7 +36,8 @@ export class FirebaseService {
   }
 
   addSector(sector: Sector) {
-    return addDoc(this.sectorCollectionRef, sector);
+    const sectorDoc = doc(this.afs, 'sectors/' + sector.sectorName);
+    return setDoc(sectorDoc, sector);
   }
 
   uploadImage(file: File) {
