@@ -34,8 +34,8 @@
       ]
     },
     {
-      "target": "startict-up-web",
-      "public": "dist/startict-up-web",
+      "target": "public-web",
+      "public": "dist/public-web",
       "ignore": [
         "**/.*"
       ],

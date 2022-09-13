@@ -1,27 +1,29 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="startup">
     <div class="page-header page-header-small" filter-color="orange">
         <div class="page-header-image rellax-header" data-rellax-speed="-8"
-            style="background-image: url('assets/img/bg5.jpg') ;">
+            [ngStyle]="{'background-image':startup?.images?.[0]}">
         </div>
         <div class="container">
             <div class="content-center">
                 <div class="photo-container">
-                    <img src="assets/img/ryan.jpg" alt="">
+                    <img style="height: 100%;width: 100%;object-fit: cover;"
+                        [src]="startup?.logoImg || ('https://via.placeholder.com/728x90.png?text=' + (startup.startupName || 'logo'))"
+                        alt="logo">
                 </div>
-                <h3 class="title">Ryan Scheinder</h3>
-                <p class="category">Photographer</p>
+                <h3 class="title">{{startup.startupName}}</h3>
+                <p class="category">{{startup.founderName}}</p>
                 <div class="content">
                     <div class="social-description">
-                        <h2>26</h2>
-                        <p>Comments</p>
+                        <h2>{{startup.numberOfEmployees}}</h2>
+                        <p>Employees</p>
                     </div>
                     <div class="social-description">
-                        <h2>26</h2>
-                        <p>Comments</p>
+                        <h2>{{startup.city}}</h2>
+                        <p>City</p>
                     </div>
                     <div class="social-description">
-                        <h2>48</h2>
-                        <p>Bookmarks</p>
+                        <h2>{{startup.yearOfEstablishment}}</h2>
+                        <p>Since</p>
                     </div>
                 </div>
             </div>
@@ -30,191 +32,32 @@
     <div class="section">
         <div class="container">
             <div class="button-container">
-                <a href="#button" class="btn btn-primary btn-round btn-lg">Follow</a>
-                <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip"
-                    title="Follow me on Twitter">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="#button" class="btn btn-default btn-round btn-lg btn-icon" rel="tooltip"
-                    title="Follow me on Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
+                <div class="btn btn-primary btn-round btn-lg" style="cursor: default;" [ngStyle]="{'background-color': startup.designColor}">
+                    Description</div>
             </div>
-            <h3 class="title">About me</h3>
-            <h5 class="description">An artist of considerable range, Ryan — the name taken by Melbourne-raised,
-                Brooklyn-based Nick Murphy — writes, performs and records all of his own music, giving it a warm,
-                intimate feel with a solid groove structure. An artist of considerable range.</h5>
+            <h5 class="description">{{startup.description}}</h5>
+
             <div class="row">
-                <div class="col-md-12">
-                    <h4 class="title text-center">My Portfolio</h4>
 
-                    <ul ngbNav #nav="ngbNav" type="pills"
-                        class="nav nav-pills nav-pills-primary  nav-pills-just-icons justify-content-center tab-space">
-
-                        <li ngbNavItem>
-                            <a ngbNavLink>
-                                <i class="now-ui-icons design_image"></i>
-                            </a>
-                            <ng-template ngbNavContent>
-                                <div class="row">
-                                    <div class="col-md-10 ml-auto mr-auto">
-                                        <div class="row collections">
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg1.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </li>
-
-                        <li ngbNavItem>
-                            <a ngbNavLink>
-                                <i class="now-ui-icons location_world"></i>
-                            </a>
-                            <ng-template ngbNavContent>
-                                <div class="row">
-                                    <div class="col-md-10 ml-auto mr-auto">
-                                        <div class="row collections">
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg6.jpg" class="img-raised">
-                                                <img src="assets/img/bg11.jpg" alt="" class="img-raised">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </li>
-
-                        <li ngbNavItem>
-                            <a ngbNavLink>
-                                <i class="now-ui-icons sport_user-run"></i>
-                            </a>
-                            <ng-template ngbNavContent>
-                                <div class="row">
-                                    <div class="col-md-10 ml-auto mr-auto">
-                                        <div class="row collections">
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg3.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg8.jpg" alt="" class="img-raised">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <img src="assets/img/bg7.jpg" alt="" class="img-raised">
-                                                <img src="assets/img/bg6.jpg" class="img-raised">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </ng-template>
-                        </li>
-
-                    </ul>
-                    <div [ngbNavOutlet]="nav"></div>
+                <div class="col d-flex align-items-center justify-content-center">
+                    Website:
+                    <a *ngIf="startup.websiteURL" [href]="startup.websiteURL">
+                        <h4 class="my-0 mx-3">{{startup.websiteURL}}</h4>
+                    </a>
                 </div>
             </div>
 
-            <!-- TODO -->
-            <!-- replace with request form -->
-            <h1>
-                Form
-            </h1>
-            <div>
-                <p class="category">Form Controls</p>
-                <div class="row">
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="form-group">
-                            <input type="text" value="" placeholder="Regular" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="form-group has-success">
-                            <input type="text" value="Success" class="form-control form-control-success" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="form-group has-danger">
-                            <input type="email" value="Error Input" class="form-control form-control-danger" />
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="input-group" [ngClass]="{'input-group-focus':focus===true}">
-                          <div class="input-group-prepend" >
-                            <span class="input-group-text">
-                                <i class="fa fa-user-circle"></i>
-                            </span>
-                          </div>
-                            <input type="text" class="form-control" placeholder="Left Font Awesome Icon" (focus)="focus=true" (blur)="focus=false">
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-3">
-                        <div class="input-group" [ngClass]="{'input-group-focus':focus1===true}">
-                            <input type="text" class="form-control" placeholder="Right Nucleo Icon" (focus)="focus1=true" (blur)="focus1=false">
-                            <div class="input-group-append">
-                              <span class="input-group-text">
-                                  <i class="now-ui-icons users_single-02"></i>
-                              </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div id="buttons">
-                    <h4>Buttons</h4>
-                    <p class="category">Pick your style</p>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <button class="btn btn-primary" type="button">Default</button>
-                            <button class="btn btn-primary btn-round" type="button">Round</button>
-                            <button class="btn btn-primary btn-round" type="button">
-                                <i class="now-ui-icons ui-2_favourite-28"></i> With Icon
-                            </button>
-                            <button class="btn btn-primary btn-icon btn-round" type="button">
-                                <i class="now-ui-icons ui-2_favourite-28"></i>
-                            </button>
-                            <button class="btn btn-primary btn-simple btn-round" type="button">Simple</button>
-                        </div>
-                    </div>
-                    <p class="category">Pick your size</p>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <button class="btn btn-primary btn-sm">Small</button>
-                            <button class="btn btn-primary">Regular</button>
-                            <button class="btn btn-primary btn-lg">Large</button>
-                        </div>
-                    </div>
-                    <p class="category">Pick your color</p>
-                    <div class="row">
-                        <div class="col-md-10">
-                            <button class="btn">Default</button>
-                            <button class="btn btn-primary">Primary</button>
-                            <button class="btn btn-info">Info</button>
-                            <button class="btn btn-success">Success</button>
-                            <button class="btn btn-warning">Warning</button>
-                            <button class="btn btn-danger">Danger</button>
-                            <button class="btn btn-neutral">Neutral</button>
-                        </div>
-                    </div>
-                    <h4>Links</h4>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <button class="btn btn-link">Default</button>
-                            <button class="btn btn-link btn-primary ">Primary</button>
-                            <button class="btn btn-link btn-info">Info</button>
-                            <button class="btn btn-link btn-success">Success</button>
-                            <button class="btn btn-link btn-warning">Warning</button>
-                            <button class="btn btn-link btn-danger">Danger</button>
-                        </div>
-                    </div>
+            <div class="row">
+                <div class="col d-flex align-items-center justify-content-center">
+                    EMAIL:
+                    <a *ngIf="startup.email" [href]="'mailto:'+startup.email">
+                        <h4 class="my-0 mx-3">{{startup.email}}</h4>
+                    </a>
                 </div>
             </div>
+
+
+
         </div>
     </div>
     <footer class="footer footer-default">
@@ -245,7 +88,7 @@
             </nav>
             <div class="copyright">
                 &copy;
-                {{data | date: 'yyyy'}}, Designed by
+                Designed by
                 <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
                 <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
             </div>
