@@ -6,9 +6,9 @@
               [(nzCollapsed)]="isCollapsed"
               [nzTrigger]="null">
       <div class="sidebar-logo">
-        <a href="https://ng.ant.design/" target="_blank">
-          <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-          <h1>Ant Design Of Angular</h1>
+        <a routerLink="/home/">
+          <img src="../../../assets/StartICT-UP.png" alt="logo">
+          <h1>Admin Dashboard</h1>
         </a>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
@@ -53,16 +53,7 @@
                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
               ></i>
           </span>
-          
-          <div class="form-group col-12">
-            <!-- <input type="file"
-            id="file"
-            #userPhoto
-            (click)="onFileSelected($event)"
-            name="image"
-            autocomplete="off"
-            /> -->
-           </div>
+
         </div>
       </nz-header>
       <nz-content>
