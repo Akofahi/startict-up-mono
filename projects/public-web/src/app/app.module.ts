@@ -8,6 +8,10 @@ import { ComponentsModule } from './components/___/components.module';
 import { PagesModule } from './pages/pages.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
     declarations: [
@@ -21,7 +25,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
         RouterModule,
         AppRoutingModule,
         ComponentsModule,
-        PagesModule
+        PagesModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore())
     ],
     providers: [],
     bootstrap: [AppComponent]

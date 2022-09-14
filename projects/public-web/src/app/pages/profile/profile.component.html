@@ -33,7 +33,19 @@
         <div class="container">
             <div class="button-container">
                 <div class="btn btn-primary btn-round btn-lg" style="cursor: default;" [ngStyle]="{'background-color': startup.designColor}">
-                    Description</div>
+                    <a
+class="twitter-share-button"
+target="_blank"
+rel="noopener noreferrer"
+data-size="large"
+href="https://twitter.com/intent/tweet?text={{URL}}"
+>
+<i class="fa-brands fa-twitter"></i>Tweet
+</a></div>
+
+
+
+<div class="btn btn-primary btn-round btn-lg" tyle="cursor: default;" [ngStyle]="{'background-color': startup.designColor}" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{URL}}" class="fb-xfbml-parse-ignore"><i class="fa-brands fa-facebook"></i>Facebook</a></div>
             </div>
             <h5 class="description">{{startup.description}}</h5>
 
@@ -55,9 +67,11 @@
                     </a>
                 </div>
             </div>
+          
 
 
 
         </div>
     </div>
 </div>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>

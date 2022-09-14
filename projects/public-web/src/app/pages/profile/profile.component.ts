@@ -10,7 +10,7 @@ import * as Rellax from 'rellax';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
+  URL:any;
 
   id = this.route.snapshot.paramMap.get('id');
   startup: Startup;
@@ -26,7 +26,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     var rellaxHeader = new Rellax('.rellax-header');
-
+    this.URL= window.location.href
+    console.log('URL',this.URL);
+    
     var body = document.getElementsByTagName('body')[0];
     body.classList.add('profile-page');
     var navbar = document.getElementsByTagName('nav')[0];
